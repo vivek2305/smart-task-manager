@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: task-postgres
+    environment:
+      POSTGRES_DB: tasks
+      POSTGRES_USER: taskuser
+      POSTGRES_PASSWORD: taskpass
+      TZ: Asia/Kolkata
+      PGTZ: Asia/Kolkata
+    ports:
+      - "5432:5432"
+    volumes:
+      - task_pg_data:/var/lib/postgresql/data
+
+  task-service:
+    image: task-service:2.0
+    container_name: task-service
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/tasks
+      SPRING_DATASOURCE_USERNAME: taskuser
+      SPRING_DATASOURCE_PASSWORD: taskpass
+
+volumes:
+  task_pg_data:
