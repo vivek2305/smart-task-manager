@@ -1,17 +1,21 @@
+server:
+  address: 0.0.0.0
+  port: 8080
+
 spring:
   application:
     name: task-service
+
   datasource:
     url: jdbc:postgresql://localhost:5432/tasks
     username: taskuser
     password: taskpass
+
   jpa:
     hibernate:
-      ddl-auto: none
-    show-sql: true
+      ddl-auto: update
+    properties:
+      hibernate.jdbc.time_zone: Asia/Kolkata
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info
+  jackson:
+    time-zone: Asia/Kolkata
