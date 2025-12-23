@@ -1,0 +1,17 @@
+# Task Service
+
+Simple Spring Boot microservice written in Kotlin.
+
+## Responsibilities
+- Manage tasks
+- Expose REST APIs
+- Trigger notifications on task completion (later)
+
+## Tech Stack
+- Kotlin
+- Spring Boot
+- PostgreSQL
+- Docker
+
+## How to run
+./gradlew bootRun

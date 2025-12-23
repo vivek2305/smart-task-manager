@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: task-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tasks
+    username: taskuser
+    password: taskpass
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
