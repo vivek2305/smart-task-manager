@@ -15,6 +15,9 @@ data class Task(
     val title: String,
 
     @Column(nullable = false)
+    val userId: String,
+
+    @Column(nullable = false)
     val completed: Boolean = false,
 
     val createdAt: LocalDateTime = LocalDateTime.now()

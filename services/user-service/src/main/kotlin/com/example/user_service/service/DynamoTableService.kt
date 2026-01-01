@@ -11,10 +11,17 @@ class DynamoTableService(
 ) {
 
     @PostConstruct
-    fun createUserTable() {
-        val tables = dynamoDbClient.listTables().tableNames()
-        if (tables.contains("Users")) return
+    fun createUserTableIfNotExists() {
+        try {
+            dynamoDbClient.describeTable {
+                it.tableName("Users")
+            }
+        } catch (e: ResourceNotFoundException) {
+            createUserTable()
+        }
+    }
 
+    private fun createUserTable() {
         val request = CreateTableRequest.builder()
             .tableName("Users")
             .keySchema(
@@ -35,3 +42,4 @@ class DynamoTableService(
         dynamoDbClient.createTable(request)
     }
 }
+

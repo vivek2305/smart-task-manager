@@ -11,9 +11,10 @@ class TaskController(
 ) {
 
     @PostMapping
-    fun createTask(@RequestParam title: String): Task {
-        return taskService.createTask(title)
-    }
+    suspend fun createTask(
+        @RequestParam userId: String,
+        @RequestParam title: String
+    ): Task = taskService.createTask(userId, title)
 
     @GetMapping
     fun getTasks(): List<Task> {

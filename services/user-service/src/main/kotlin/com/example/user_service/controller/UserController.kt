@@ -13,10 +13,10 @@ class UserController(
 ) {
 
     @PostMapping
-    fun createUser(@RequestBody user: User): String {
-        userRepository.save(user)
-        return "User created"
+    fun createUser(@RequestBody user: User): User {
+        return userRepository.save(user)
     }
+
 
     @GetMapping("/{id}")
     fun getUser(@PathVariable id: String): User? {

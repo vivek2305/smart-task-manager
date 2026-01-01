@@ -19,3 +19,4 @@ services:
       AWS_REGION: us-east-1
       DYNAMODB_ENDPOINT: http://dynamodb:8000
       SERVER_ADDRESS: 0.0.0.0
+      SPRING_PROFILES_ACTIVE: local
