@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: user-service
+
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+    com.example.userservice: DEBUG
+
+aws:
+  DynamoDB:
+    endpoint: http://dynamodb:8000
+    region: us-east-1
