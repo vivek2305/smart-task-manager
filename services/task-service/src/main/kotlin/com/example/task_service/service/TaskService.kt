@@ -1,16 +1,27 @@
 package com.example.task_service.service
 
+import com.example.task_service.client.UserServiceClient
 import com.example.task_service.model.Task
 import com.example.task_service.repository.TaskRepository
 import org.springframework.stereotype.Service
 
+
 @Service
 class TaskService(
+    private val userServiceClient: UserServiceClient,
     private val taskRepository: TaskRepository
 ) {
 
-    fun createTask(title: String): Task {
-        val task = Task(title = title)
+    suspend fun createTask(userId: String, title: String): Task {
+        //Validate user exists (sync business call)
+        val user = userServiceClient.getUserById(userId)
+
+        //Save task to PostgreSQL
+        val task = Task(
+            userId = user.id,
+            title = title
+        )
+
         return taskRepository.save(task)
     }
 
@@ -25,3 +36,4 @@ class TaskService(
         return taskRepository.save(completedTask)
     }
 }
+

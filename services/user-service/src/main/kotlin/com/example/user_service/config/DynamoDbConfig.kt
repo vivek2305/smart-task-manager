@@ -4,6 +4,7 @@ package com.example.user_service.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.core.env.Environment
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider
 import software.amazon.awssdk.regions.Region
@@ -16,7 +17,7 @@ class DynamoDbConfig {
     @Bean
     fun dynamoDbClient(): DynamoDbClient =
         DynamoDbClient.builder()
-            .endpointOverride(URI.create("http://dynamodb:8000"))
+            .endpointOverride(URI.create("http://localhost:8000"))
             .region(Region.US_EAST_1)
             .credentialsProvider(
                 StaticCredentialsProvider.create(

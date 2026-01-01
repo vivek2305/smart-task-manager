@@ -10,7 +10,7 @@ class UserRepository(
     private val dynamoDbClient: DynamoDbClient
 ) {
 
-    fun save(user: User) {
+    fun save(user: User): User {
         val item = mapOf(
             "id" to AttributeValue.builder().s(user.id).build(),
             "name" to AttributeValue.builder().s(user.name).build(),
@@ -21,6 +21,8 @@ class UserRepository(
             it.tableName("Users")
             it.item(item)
         }
+
+        return user
     }
 
     fun findById(id: String): User? {
