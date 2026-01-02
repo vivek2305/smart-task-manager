@@ -9,5 +9,11 @@ class TaskServiceApplication
 
 fun main(args: Array<String>) {
 	TimeZone.setDefault(TimeZone.getTimeZone("Asia/Kolkata"))
-	runApplication<TaskServiceApplication>(*args)
+    try {
+        runApplication<TaskServiceApplication>(*args)
+    } catch (t: Throwable) {
+        t.printStackTrace()
+        // ensure process exits so Gradle shows failure cause
+        System.exit(1)
+    }
 }
